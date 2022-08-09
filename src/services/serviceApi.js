@@ -15,6 +15,7 @@ export const serviceApi = () => {
   let url = "/products";
   let urlSignin = "/api/register";
   let urlLogin = "/signin";
+  let urlLike = "/likes";
 
   const get = async () => {
     const res = await axios.get(url);
@@ -55,8 +56,12 @@ export const serviceApi = () => {
     return res;
   };
 
+  const like = async (id) => {
+    return await axios.get(urlLike + "/products/" + id);
+  };
+
   const logout = () => {
-    //TODO REFACATOR AUTH LOCALSTORAGE  
+    //TODO REFACATOR AUTH LOCALSTORAGE
     localStorage.removeItem("auth_token");
     localStorage.removeItem("auth_user");
     localStorage.removeItem("auth_id");
@@ -74,6 +79,7 @@ export const serviceApi = () => {
     signin,
     login,
     logout,
+    like,
     url,
     baseUrl,
   };

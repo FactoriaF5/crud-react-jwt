@@ -13,12 +13,20 @@ const CrudApiCard = ({ card }) => {
   let { name, img, id, likesCount } = card;
   let api = serviceApi();
 
+  const like = async () => {
+    api.like(id);
+
+    //TODO: USE VIRTUAL DOM
+    window.location.reload();
+  };
+
   const deleteCard = (e) => {
     e.preventDefault();
     api
       .destroy(id)
       .then((res) => {
         alert(res.data.msg);
+        //TODO: USE VIRTUAL DOM
         window.location.reload();
       })
       .catch((error) => {
@@ -37,7 +45,7 @@ const CrudApiCard = ({ card }) => {
             {/* <button className="bt-ico">
               <img className="img-ico" src={star} alt="star value button" />
             </button> */}
-            <button className="bt-ico">
+            <button className="bt-ico" onClick={() => like()}>
               <img
                 className="img-ico"
                 src={card.liked ? heartFill : heart}
