@@ -9,6 +9,21 @@ axios.interceptors.request.use(function (config) {
   config.headers.Authorization = token ? `Bearer ${token}` : "";
   return config;
 });
+//Adding Axios Response Interceptors
+axios.interceptors.response.use(
+  function (response) {
+    // CODE Executes in HTTP Status 2XX response
+    // You Code Is IMPORTANT Here!
+    console.log(response);
+    return response;
+  },
+  function (error) {
+    // CODE Executes in no HTTP Status 2XX response
+    // You Code Is IMPORTANT Here!
+    console.log(error.response);
+    return Promise.reject(error);
+  }
+);
 
 export const serviceApi = () => {
   let baseUrl = "127.0.0.1:8080";
